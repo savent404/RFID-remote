@@ -29,7 +29,6 @@ int main(void) {
             *(pt-3) = '\0';
             output2file(buffer);
             memset(buffer, 0, sizeof(buffer));
-            printf("One line\n");
             pt = buffer;
             continue;
         }
