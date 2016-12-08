@@ -5,9 +5,9 @@ then output to a file.
 ## Raspberry Config
         sudo raspi-config //enable Serial console
         sudo vi /boot/cmdline.txt // THEN remove "console=ttyAMA0,115200"
-## Make File
+## make file
         make
-## Auto Run
-vi "sudo /home/pi/Documents/RFID-remote/a.out" to `/etc/rc.local`
+## auto startup as Deamon
+vi "sudo /home/pi/Documents/RFID-remote/a.out &" to `/etc/rc.local`
 ## File Output
 path is `/home/pi/Documents/remoteID`
