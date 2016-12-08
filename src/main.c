@@ -29,7 +29,9 @@ int main(void) {
             *(pt-3) = '\0';
             output2file(buffer);
             memset(buffer, 0, sizeof(buffer));
+            printf("One line\n");
             pt = buffer;
+            continue;
         }
         pt += 1;
     }
@@ -39,7 +41,7 @@ int output2file(char * pt) {
     int cnt = 10;
     time_t t;
     char buf[100] = "";
-    int fd = open("/home/pi/remote-ID", O_WRONLY|O_CREAT|O_APPEND);
+    int fd = open("/home/pi/Documents/remoteID", O_WRONLY|O_CREAT|O_APPEND);
     if (fd < 0)
         return -1;
     if (*pt++ != 0x30||*pt++ != 0x32)

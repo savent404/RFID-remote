@@ -1,4 +1,4 @@
 all:
-    gcc -g main.c -lwiringPi
+	gcc -g src/main.c -lwiringPi
 clean:
-    rm a.out
+	rm a.out
