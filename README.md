@@ -8,6 +8,7 @@ then output to a file.
 ## make file
         make
 ## auto startup as Deamon
-vi "sudo /home/pi/Documents/RFID-remote/a.out &" to `/etc/rc.local`
+vi `sudo /home/pi/Documents/RFID-remote/a.out &` to **/etc/rc.local**
 ## File Output
-path is `/home/pi/Documents/remoteID`
+path is **/home/pi/Documents/remoteID**
+## View in [Github](https://github.com/savent404/RFID-remote)
