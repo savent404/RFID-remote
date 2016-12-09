@@ -27,7 +27,7 @@ int main(void) {
         if (*pt == 0x0A && *(pt - 1) == 0x0D) {
             //cut string:"\r\n"
             *(pt-3) = '\0';
-            output2file(buffer);
+            output2file(pt - 17);
             memset(buffer, 0, sizeof(buffer));
             pt = buffer;
             continue;
