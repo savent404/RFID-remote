@@ -17,9 +17,10 @@ static char buffer[20];
 static char *pt = buffer;
 static pthread_t thread1, thread2;
 static int fd;
-static void sig = 0;
+static int sig = 0;
 static void *serial_get(void *);
 static void *sig_get(void *);
+static int res = 0;
 
 int main(void) {
     fd = serialOpen("/dev/ttyAMA0", 9600);
@@ -76,6 +77,7 @@ static void *serial_get(void *arg) {
             //cut string:"\r\n"
             *(pt-3) = '\0';
             output2file(pt - 17);
+            printf("L:%s\n", pt - 17);
             memset(buffer, 0, sizeof(buffer));
             pt = buffer;
             continue;
@@ -84,17 +86,19 @@ static void *serial_get(void *arg) {
     }
 }
 static void *sig_get(void *arg) {
-    int in = open(FIFO_NAME, O_RDONLY);
-    char buf[10];
+    char buf[50];
+    int in = open(EXTRA_FIFO_NAME, O_RDONLY);
     if (in < 0) {
         system("echo \"Open FIFO error\" >> /home/pi/Documents/SerialLog");
         system("echo date >> /home/pi/Documents/SerialLog");
         exit (-4);
     }
     while (1) {
-        if (read(in, buf, 10) > 0) {
+        if (read(in, buf, 50) > 0) {
+            printf("Get sig\n");
             sig = 1;
             sleep(10);
+            printf("Out sig\n");
             sig = 0;
         }
     }
@@ -121,7 +125,6 @@ int output2file(char * pt) {
     strcpy(buf, pt);
     strcat(buf, "\tLogin at\t");
     strcat(buf, asctime(localtime(&t)));
-    strcat(buf, "\n");
     write(out, buf, strlen(buf));
     close(out);
     return 0;
